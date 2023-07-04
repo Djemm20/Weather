@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather News</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="script.js"></script>
+</head>
+<body>
+	<div class="navbar">
+		<div class="navbar-left">
+			<p><i class="fa-solid fa-wind" style="color: white;"></i><span class="logo">Weather Reader</span></p>
+		</div>
+		<div class="navbar-right">
+			<ul>
+			    <li><a href="index.html">Home</a></li>
+			    <li><a href="news.html" class="active">News</a></li>
+			</ul>
+		</div>
+	</div>
+    <h1>Weather News And Articles</h1>
+    <div id="news-container" class="news-container"></div>
+  
+    <script>
+        apikey = 'b9558a72c05f466817c21337ae611ceb';
+        url = 'https://gnews.io/api/v4/search?q=weather&lang=en&country=us&max=10&apikey=' + apikey;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                // Process the response and display news articles
+                const articles = data.articles;
+                const newsContainer = document.getElementById('news-container');
+
+                articles.forEach(article => {
+                // Extract relevant information from each article
+                const title = article.title;
+                const description = article.description;
+                const url = article.url;
+                const publishedAt = new Date(article.publishedAt).toLocaleDateString();
+                const image = article.image;
+
+                // Generate HTML markup for each news article
+                const articleHTML = `
+                    <div class="article">
+                    <h3>${title}</h3>
+                    <img src='${image}' alt='news-image'>
+                    <p>${description}<a href='${url}' target='_blank'>Read more</a></p>
+                    <p>Published: ${publishedAt}</p>                    
+                    </div>
+                `;
+
+                // Append the article HTML to the news container
+                newsContainer.innerHTML += articleHTML;
+                });
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+    </script>
+    
+  
+	<div class="container">
+        <div class="news-Container" id="newsContainer"></div>
+	</div>
+	<footer>
+		<div class="footer-bottom">
+		    <p>&copy; 2023 Weather Reader. All Rights Reserved.</p>
+		</div>
+	</footer>
+	  
+</body>
+</html>
+

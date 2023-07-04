@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Forecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="script.js"></script>
+</head>
+<body>
+	<div class="navbar">
+		<div class="navbar-left">
+			<p><i class="fa-sharp fa-solid fa-wind" style="color: white;"></i><span class="logo">Weather Reader</span></p>
+		</div>
+		<div class="form">
+			<form method="post" onsubmit="handleFormSubmit(event)">
+				<div class="form-inner">
+					<div class="form-control">
+						<input type="text" id="city-input" placeholder="Search City..." class="search-bar">
+						<button type="submit" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
+						<ul id="suggestion-list"></ul>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="navbar-right">
+			<ul>
+			    <li><a href="index.html" class="active">Home</a></li>
+			    <li><a href="news.html">News</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="iframe">
+			<iframe src="https://www.rainviewer.com/map.html?loc=37.44,-97.2729,5&oFa=0&oC=1&oU=0&oCS=1&oF=0&oAP=0&c=3&o=90&lm=1&layer=radar&sm=1&sn=1&hu=0" width="100%;" frameborder="0" style="border:0;height:70vh;" allowfullscreen></iframe>
+		</div>
+		<!-- <div class="form">
+			<form method="post" onsubmit="handleFormSubmit(event)">
+				<div class="form-inner">
+					<div class="form-control">
+						<input type="text" id="city-input" style="width: 700px;" placeholder="Search City...">
+					</div>
+				</div>
+				<button type="submit">Submit</button>
+			</form>
+		</div> -->
+		<div id="weather-info"></div>
+		
+	</div>
+
+	<div class="current">
+		<div class="layer1">
+		    <ul>
+			    <li><p class="inline">Current Weather</p></li>
+			    <li><p class="inline" id="city-name"></p></li>
+			    <li><p class="inline" id="current-date"></p></li>
+		    </ul>
+		</div>
+		<div class="pos">
+		    <div class="pos-left">
+			    <div class="layer2">
+			        <p class="temp" id="current-temp"></p>			        
+			    </div>
+			    <p class="layer2-out" id="current-condition"></p>
+		    </div>
+		    <div class="pos-right">
+			    <div class="layer3">
+			        <p class="side" id="current-wind"></p>
+			        <p class="side" id="current-humidity"></p>
+			        <p class="side" id="current-precipitation"></p>
+			    </div>
+		    </div>
+		</div>
+	</div>
+	  
+	<div class="forecast" id="forecast">
+		<h1 class="header">Forecast for the Next 6 Days</h1>
+		<div id="forecast-days"></div>
+	 </div>
+	
+
+
+	 <footer>
+		<div class="footer-bottom">
+		  <p>&copy; 2023 Weather Reader. All Rights Reserved.</p>
+		</div>
+	  </footer>
+	  
+</body>
+</html>
+
